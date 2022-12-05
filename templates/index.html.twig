@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{# Titre de la page #}
+{% block title %}Actualités{% endblock %}
+
+{# Ici vous mettez vos codes HTML et balises Twig au besoin #}
+{% block body %}
+
+<div class="section1">
+    <h1 style="text-align: center" class="title">Actualités</h1>
+
+    </table>
+    <div class="services" style="margin: 50px 12%!important">
+        {% for value in data %}
+
+        {% if value.section == "actualite" %}
+        <div class="services-item" style="margin: 22px 0px 0px 55px!important">
+            <img style="width: {{ value.style }}!important" src=" {{ value.image }}">
+            <section>
+                <i class="fa fa-heart-o"></i>
+                <h1 class="titleSection1">{{ value.titre }}</h1>
+                <p class="pSection1">{{ value.text }}</p>
+            </section>
+    </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+
+    </div>
+    <section class="page-section about-heading">
+        <h4 style="text-align: center" class="title">Nos valeurs</h4>
+
+        <div class="services" style="margin: 50px 0%!important">
+            {% for value in data %}
+
+            {% if value.section == "valeur" %}
+            <div class="services-item" style="margin: 22px 0px 0px 55px!important;/* width: 12%!important;*/">
+                <img src="{{ value.image }}" height="100" width="auto" alt="" />
+              <h3 class="services-item-header">{{ value.text }}</h3>
+            </div>
+            {% endif %}
+            {% endfor %}
+          </div>
+
+    </section>
+        <!--partenaire-->
+        <section class="page-section cta">
+            <h1 style="text-align: center" class="title">Nos partenaires</h1>
+            <div class="container">
+                <div class="row">
+                    <div class="partenaire">
+                        <div class="slide-track">
+                            {% for value in partenaire %}
+                            <div class="S-partenaire">
+                                <img src="{{ value.image }}" height="100" width="250" alt="" />
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        {% endblock %}

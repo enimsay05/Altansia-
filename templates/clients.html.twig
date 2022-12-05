@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{# Titre de la page #}
+{% block title %}Clients{% endblock %}
+
+{# Ici vous mettez vos codes HTML et balises Twig au besoin #}
+{% block body %}
+    <section class="page-section about-heading">
+        <h4 style="text-align: center; margin-top: 5rem!important;" class="title">{{ titre }}</h4>
+        <div class="services">
+            {% for value in client %}
+                {% if value.section == "section1" %}
+                    <div class="services-item">
+                        <img src="{{ value.image }}" height="100" width="auto" alt=""/>
+                        <h3 class="services-item-header">{{ value.text }}</h3>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </section>
+    <section>
+
+        <h4 style="text-align: center" class="title">{{ titre2 }}</h4>
+        <div class="services">
+
+            <div class="main-wrapper">
+                {% for value in client %}
+                    {% if value.section == "section2" %}
+                        <div class="card">
+                            <div class="imgbox">
+                                <img src="{{ value.image }}">
+                            </div>
+                            <div class="details">
+                                <h2>{{ value.text }} </h2>
+                            </div>
+                        </div>
+
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    <section class="page-section about-heading">
+        <h4 style="text-align: center" class="title">{{ titre3 }}</h4>
+        <div class="services">
+            {% for value in client %}
+            {% if value.section == "section3" %}
+            <div class="services-item">
+                <img src="{{ value.image }}" height="100" width="auto" alt=""/>
+            </div>
+{% endif %}
+{% endfor %}
+
+        </div>
+    </section>
+{% endblock %}

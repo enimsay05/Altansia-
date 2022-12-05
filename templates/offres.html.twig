@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+
+{# Titre de la page #}
+{% block title %}Offres{% endblock %}
+
+{# Ici vous mettez vos codes HTML et balises Twig au besoin #}
+{% block body %}
+    <section class="page-section cta" style="padding-top: 1rem!important;margin-top:1rem;!important">
+        <row>
+
+            <div class="d-flexy">
+                <img src="assets/equipe.png" style="width: 22%;" alt=""/>
+
+                <h3 class="services-item-header"
+                    style="font: 700 27px Montserrat, sans-serif!important;margin: 15% 0 10px!important;">Nous
+                    rejoindre</h3>
+            </div>
+        </row>
+    </section>
+    <section class="page-section cta" style="padding-top: 1rem!important;margin-top:1rem;!important">
+        <row class="d-flexo">
+            {% for value in offre %}
+            {% if value.titre == "Candidature" %}
+            <img src="assets/img/altansia.png" style="width: 7%; margin-left: 46%;" alt=""/>
+
+            <div class="services-item" style="width: 100%!important;">
+
+                <b> {{ value.text }} </b>
+
+            </div>
+
+            <div class="services-item" style="width: 100%!important;">
+
+                <a href="mailto:{{value.email}}?subject={{ value.text }}">
+                    <button type="button" class="btn btn-primary btnx">Postuler</button>
+                </a>
+            </div>
+                {% endif %}
+            {% endfor %}
+        </row>
+
+        <div class="container" style="margin-top: 5%;!important;">
+            <ul class="list-unstyled list-hours mb-5 text-left">
+               {% for value in offre %}
+                    <li class="list-unstyled-item list-hours-item d-flexi">
+                        <b>  {{ value.titre }}</b>
+                        <p class="more">
+                            {{ value.text|nl2br  }}
+                        </p>
+                        <a href="mailto:{{value.email}}?subject={{ value.titre }}">
+                            <button type="button" class="btn btn-primary btnx">Postuler</button>
+                        </a>
+
+                    </li>
+
+                {% endfor %}
+
+            </ul>
+        </div>
+
+        {# hna kan #}
+
+    </section>
+    <!--partenaire-->
+    <section class="page-section cta">
+        <h1 style="text-align: center" class="title">Nos partenaires</h1>
+        <div class="container">
+            <div class="row">
+                <div class="partenaire">
+                    <div class="slide-track">
+
+                        {% for value in partenaire %}
+                            <div class="S-partenaire">
+                                <img src="{{ value.image }}" height="100" width="250" alt="" />
+                            </div>
+                        {% endfor %}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
