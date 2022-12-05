@@ -22,8 +22,8 @@ class IndexController extends AbstractController
     /**
      * @param array $baseRepository
      * @return array
+     * @Route("/base", name="base")
      */
-    #[Route('/base', name: 'base')]
     public function base(array $baseRepository): array
     {
         $baseArray = array();
@@ -43,10 +43,10 @@ class IndexController extends AbstractController
     /**
      * @param ActualiteRepository $actualiteRepository
      * @param PartenaireRepository $partenaireRepository
+     * @Route("/", name="actualites")
      * @return Response
      */
-    #[Route('/', name: 'actualites')]
-    public function index(ActualiteRepository $actualiteRepository,PartenaireRepository $partenaireRepository): Response
+    public function index(ActualiteRepository $actualiteRepository,PartenaireRepository $partenaireRepository,BaseRepository $baseRepository): Response
     {
         /* return $this->json([
              'message' => 'Welcome to your new controller!',
@@ -55,6 +55,7 @@ class IndexController extends AbstractController
 
         $actualites = $actualiteRepository->findAll();
         $data = array();
+         $base= $this->base($baseRepository->findAll());
         foreach ($actualites as $key => $actualite) {
             $data[$key] = [
                 "section" => $actualite->getSection(),
@@ -73,14 +74,15 @@ class IndexController extends AbstractController
             ];
         }
 
-        return $this->render('index.html.twig',array("data"=>$data,"partenaire"=>$partenaria));
+        return $this->render('index.html.twig',array("data"=>$data,"partenaire"=>$partenaria,"base"=>$base));
     }
 
     /**
      * @param QuiSommesNousRepository $quiSommesNousRepository
+     * @param BaseRepository $baseRepository
      * @return Response
+     * @Route("/quiSommesNous", name="consultants")
      */
-    #[Route('/quiSommesNous', name: 'consultants')]
     public function consultants(QuiSommesNousRepository $quiSommesNousRepository,BaseRepository $baseRepository): Response
     {
         $qsnSections = $quiSommesNousRepository->findAll();
@@ -102,13 +104,13 @@ class IndexController extends AbstractController
     /**
      * @param ClientRepository $clientRepository
      * @return Response
+     *  @Route("/clients", name="clients")
      */
-    #[Route('/clients', name: 'clients')]
-    public function clients(ClientRepository $clientRepository): Response
+    public function clients(ClientRepository $clientRepository,BaseRepository $baseRepository): Response
     {
         $clients = $clientRepository->findAll();
         $clientel = array();
-        $base= $this->base();
+        $base= $this->base($baseRepository->findAll());
         $titre = "";
         $titreSection2="";
         $titreSection3="";
@@ -134,9 +136,10 @@ class IndexController extends AbstractController
     /**
      * @param OffreRepository $offreRepository
      * @param PartenaireRepository $partenaireRepository
+     * @param BaseRepository $baseRepository
      * @return Response
+     * @Route("/offres", name="offres")
      */
-    #[Route('/offres', name: 'offres')]
     public function offres(OffreRepository $offreRepository,PartenaireRepository $partenaireRepository,BaseRepository $baseRepository): Response
     {
         $offres = $offreRepository->findAll();
